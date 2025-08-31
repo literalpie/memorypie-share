@@ -1,5 +1,5 @@
 {
-  "name": "more-clerk",
+  "name": "memorypie-share",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,6 +16,8 @@
     "@clerk/clerk-react": "^5.25.0",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@tanstack/react-router": "^1.131.31",
+    "@tanstack/react-router-devtools": "^1.131.31",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.26.0",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@tailwindcss/vite": "^4.0.14",
+    "@tanstack/router-plugin": "^1.131.31",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
