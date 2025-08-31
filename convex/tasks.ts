@@ -24,6 +24,28 @@ export const listFolders = query({
   },
 });
 
+export const getFolder = query({
+  args: { folderSlug: v.string() },
+  handler: async (ctx, args) => {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+    if (userId === undefined) {
+      throw new Error("not authenticated");
+    }
+    const folder = await ctx.db
+      .query("folders")
+      .withIndex("by_slug", (q) => q.eq("slug", args.folderSlug))
+      .unique();
+    if(folder === undefined || folder?.userId !== userId) {
+      throw new Error('folder not found or it isn\'t yours');
+    }
+    const itemsInFolder = await ctx.db
+      .query("memorizationItems")
+      .withIndex("by_folder", (q) => q.eq("folderId", folder?._id))
+      .collect();
+    return { folder: {...folder, memItems: itemsInFolder} };
+  },
+});
+
 export const createFolder = mutation({
   args: {
     title: v.string(),

@@ -6,7 +6,7 @@ export default defineSchema({
     userId: v.string(),
     title: v.string(),
     slug: v.string(),
-  }).index('by_user_id', ['userId']),
+  }).index('by_user_id', ['userId']).index('by_slug', ['slug']),
   memorizationItems: defineTable({
     folderId: v.id('folders'),
     title: v.string(),
