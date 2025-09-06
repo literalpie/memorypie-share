@@ -1,4 +1,4 @@
-import { createFileRoute, nav, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
@@ -36,14 +36,13 @@ function RouteComponent() {
         ),
       }),
     },
-    onSubmit: ({ value }) => {
-      return createFolder({
+    onSubmit: async ({ value }) => {
+      await createFolder({
         slug: value.slug,
         title: value.title,
         memItems: value.items,
-      }).then(a=>{
-        return navigate({to: '/'})
       });
+      await navigate({ to: "/" });
     },
   });
 
@@ -158,9 +157,8 @@ function RouteComponent() {
                             )}
                           </form.Field>
                           <Button
-                            className="self-center"
-                            variant="secondary"
-                            size="icon"
+                            type="button"
+                            className="self-center border-0 rounded-full"
                             onClick={() => itemsField.removeValue(i)}
                           >
                             <Trash />
@@ -175,7 +173,6 @@ function RouteComponent() {
                 <Button
                   type="button"
                   onClick={() => itemsField.pushValue({ title: "", text: "" })}
-                  variant="outline"
                   className="w-full h-12 border-dashed border-2 border-slate-300 hover:border-green-400 hover:bg-green-50 text-slate-600 hover:text-green-700 transition-all duration-200"
                 >
                   <Plus className="h-4 w-4 mr-2" />
