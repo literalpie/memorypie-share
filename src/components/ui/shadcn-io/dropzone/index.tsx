@@ -137,12 +137,10 @@ export const DropzoneContent = ({
       </div>
       <p className="my-2 w-full truncate font-medium text-sm">
         {src.length > maxLabelItems
-          ? // @ts-expect-error -- ListFormat is newish?
-            `${new Intl.ListFormat("en").format(
+          ? `${new Intl.ListFormat("en").format(
               src.slice(0, maxLabelItems).map((file) => file.name),
             )} and ${src.length - maxLabelItems} more`
-          : // @ts-expect-error -- ListFormat is newish?
-            new Intl.ListFormat("en").format(src.map((file) => file.name))}
+          : new Intl.ListFormat("en").format(src.map((file) => file.name))}
       </p>
       <p className="w-full text-wrap text-muted-foreground text-xs">
         Drag and drop or click to replace
@@ -174,7 +172,6 @@ export const DropzoneEmptyState = ({
 
   if (accept) {
     caption += "Accepts ";
-    // @ts-expect-error -- ListFormat is newish?
 
     caption += new Intl.ListFormat("en").format(Object.keys(accept));
   }
