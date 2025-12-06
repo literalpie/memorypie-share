@@ -15,9 +15,9 @@
   --color-destructive-shadow: hsl(0, 100%, 77%);
   --color-black: hsl(0, 0%, 0%);
   --color-text: hsla(0, 0%, 0%, 0.87);
-  --color-divider: hsla(240, 100%, 26%, 0.2);
-  --color-background-hover: hsla(0, 0%, 50%, 0.1);
-  --color-background-focus: hsla(0, 0%, 50%, 0.2);
+  --color-divider: var(--color-blue-200);
+  --color-background-hover: var(--color-gray-100);
+  --color-background-focus: var(--color-gray-200);
   --color-outline-focus: hsl(0, 0%, 50%);
   --color-background-active: hsla(240, 84%, 76%, 0.19);
   --color-border: hsl(0, 0%, 44%);
@@ -31,7 +31,7 @@
   body {
     color: var(--color-light);
     background: var(--color-dark);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, sans-serif;
   }
   
   /* Dark mode color overrides */
@@ -60,7 +60,7 @@
   body {
     color: var(--color-dark);
     background: var(--color-light);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, sans-serif;
   }
 }
 

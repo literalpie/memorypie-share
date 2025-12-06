@@ -1,10 +1,10 @@
-import { ComponentProps } from "react";
 import { useFieldContext } from "./form-hooks";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { LabelProps } from "@radix-ui/react-label";
 
-interface TextFieldProps extends ComponentProps<'div'> {
+interface TextFieldProps extends LabelProps {
   label: string;
 }
 
@@ -12,8 +12,12 @@ export const TextField = ({ label, className, ...rest }: TextFieldProps) => {
   const field = useFieldContext<string>();
 
   return (
-    <div className={cn("space-y-2 grow", className)} {...rest}>
-      <Label htmlFor={field.name}>{label}</Label>
+    <Label
+      htmlFor={field.name}
+      className={cn("grow flex flex-col items-start", className)}
+      {...rest}
+    >
+      {label}
       <Input
         id={field.name}
         value={field.state.value}
@@ -22,6 +26,6 @@ export const TextField = ({ label, className, ...rest }: TextFieldProps) => {
         type="text"
         onChange={(e) => field.handleChange(e.target.value)}
       />
-    </div>
+    </Label>
   );
 };

@@ -14,8 +14,8 @@ function RouteComponent() {
   return (
     <div className="py-8 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-2">Create New Shared Folder</h2>
-        <p className="text-lg">
+        <h2 className="text-3xl font-bold mb-2">Create New Shared Folder</h2>
+        <p className="text-lg font-extralight">
           This folder and all of its items will be available to anyone with the
           link
         </p>
@@ -29,6 +29,8 @@ function RouteComponent() {
           });
           await navigate({ to: "/" });
         }}
+        submitButtonText="Create Folder"
+        submitButtonLoadingText="Creating..."
       />
     </div>
   );

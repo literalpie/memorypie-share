@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { api } from "../../../convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
-import { FolderForm } from "@/components/FolderForm/FolderForm";
+import { FolderForm, GetFolder } from "@/components/FolderForm/FolderForm";
 
 export const Route = createFileRoute("/$folderSlug/")({
   component: RouteComponent,
@@ -18,8 +18,8 @@ function RouteComponent() {
   return (
     <div className="py-8 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-2">Update Shared Folder</h2>
-        <p className="text-lg">
+        <h2 className="text-3xl font-bold mb-2">Update Shared Folder</h2>
+        <p className="text-lg font-extralight">
           This folder and all of its items will be available to anyone with the
           link
         </p>
@@ -27,27 +27,19 @@ function RouteComponent() {
       <FolderForm
         initialValue={folder}
         onSubmit={async (value) => {
-          console.log("submitted value", value, {
-            slug: value.slug,
-            title: value.title,
-            id: value._id,
-            memItems: value.memItems.map((item) => ({
-              text: item.text,
-              title: item.title,
-              _id: (item as any)._id,
-            })),
-          });
           await updateFolder({
             slug: value.slug,
             title: value.title,
-            id: value._id,
+            id: (value as GetFolder)._id,
             memItems: value.memItems.map((item) => ({
               text: item.text,
               title: item.title,
-              _id: (item as any)._id,
+              _id: (item as GetFolder['memItems'][number])._id,
             })),
           });
         }}
+        submitButtonText="Update Folder"
+        submitButtonLoadingText="Updating Folder..."
       />
     </div>
   );
