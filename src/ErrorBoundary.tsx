@@ -2,10 +2,7 @@ import { Component, ReactNode } from "react";
 
 // NOTE: Once you get Clerk working you can simplify this error boundary
 // or remove it entirely.
-export class ErrorBoundary extends Component<
-  { children: ReactNode },
-  { error: ReactNode | null }
-> {
+export class ErrorBoundary extends Component<{ children: ReactNode }, { error: ReactNode | null }> {
   constructor(props: { children: ReactNode }) {
     super(props);
     this.state = { error: null };
@@ -13,10 +10,7 @@ export class ErrorBoundary extends Component<
 
   static getDerivedStateFromError(error: unknown) {
     const errorText = "" + (error as any).toString();
-    if (
-      errorText.includes("@clerk/clerk-react") &&
-      errorText.includes("publishableKey")
-    ) {
+    if (errorText.includes("@clerk/clerk-react") && errorText.includes("publishableKey")) {
       const [clerkDashboardUrl] = errorText.match(/https:\S+/) ?? [];
       const trimmedClerkDashboardUrl = clerkDashboardUrl?.endsWith(".")
         ? clerkDashboardUrl.slice(0, -1)
@@ -58,9 +52,7 @@ export class ErrorBoundary extends Component<
     if (this.state.error !== null) {
       return (
         <div className="bg-red-500/20 border border-red-500/50 p-8 flex flex-col gap-4 container mx-auto">
-          <h1 className="text-xl font-bold">
-            Caught an error while rendering:
-          </h1>
+          <h1 className="text-xl font-bold">Caught an error while rendering:</h1>
           {this.state.error}
         </div>
       );

@@ -14,32 +14,35 @@ function RootComponent() {
 
   return (
     <div className="flex flex-row">
-      <div className="w-52 h-screen border-divider border-e flex-shrink-0 flex flex-col">
-        <header className="p-4 border-b-1 border-divider flex flex-row justify-between items-center font-extrabold">
+      <div className="w-52 h-screen border-divider border-e shrink-0 flex flex-col">
+        <header className="p-4 border-b border-divider flex flex-row justify-between items-center font-extrabold">
           <h1>
             <Link to="/">Memorypie Share</Link>
           </h1>
           <UserButton />
         </header>
         <div className="flex flex-col grow overflow-y-auto">
-          {((folders?.length ?? 0) === 0) ? (
-            <p className="text-muted-foreground text-center py-4">
-              No folders created yet
-            </p>
+          {(folders?.length ?? 0) === 0 ? (
+            <p className="text-muted-foreground text-center py-4">No folders created yet</p>
           ) : (
             folders?.map((folder) => (
-              <Button data-active={routedFolderSlug === folder.slug} variant="navigation" key={folder._id} asChild>
+              <Button
+                data-active={routedFolderSlug === folder.slug}
+                variant="navigation"
+                key={folder._id}
+                asChild
+              >
                 <Link to={`/${folder.slug}`}>{folder.title}</Link>
               </Button>
             ))
           )}
-          <div className="flex-grow data-[active]-border" />
+          <div className="grow data-[active]-border" />
         </div>
         <Button variant="primary" className="m-2" asChild>
           <Link to="/new">New Shared Folder</Link>
         </Button>
       </div>
-      <div className="overflow-y-auto h-screen flex-grow">
+      <div className="overflow-y-auto h-screen grow">
         <Outlet />
       </div>
     </div>

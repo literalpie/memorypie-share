@@ -9,12 +9,7 @@ interface TextFieldProps extends LabelProps {
   placeholder: string;
 }
 
-export const TextAreaField = ({
-  label,
-  placeholder,
-  className,
-  ...rest
-}: TextFieldProps) => {
+export const TextAreaField = ({ label, placeholder, className, ...rest }: TextFieldProps) => {
   const field = useFieldContext<string>();
 
   return (

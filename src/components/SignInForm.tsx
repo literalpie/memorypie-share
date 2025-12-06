@@ -6,14 +6,10 @@ export function SignInForm() {
     <div className="flex flex-col gap-8 w-96 mx-auto">
       <p>Sign in to create shared memorization items.</p>
       <SignInButton mode="modal">
-        <Button>
-          Sign in
-        </Button>
+        <Button>Sign in</Button>
       </SignInButton>
       <SignUpButton mode="modal">
-        <button>
-          Sign up
-        </button>
+        <button>Sign up</button>
       </SignUpButton>
     </div>
   );

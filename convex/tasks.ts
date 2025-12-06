@@ -77,7 +77,7 @@ export const createFolder = mutation({
         order: index,
       });
     });
-    await Promise.all([createAllItems]);
+    await Promise.all(createAllItems);
     console.log("Added new document with id:", id);
   },
 });
@@ -110,17 +110,17 @@ export const updateFolder = mutation({
     });
 
     // delete items that are in existing folder, but not in update
-    const updatedIds = args.memItems.map(item=>item._id).filter(Boolean);
+    const updatedIds = args.memItems.map((item) => item._id).filter(Boolean);
     const itemsInFolder = await ctx.db
       .query("memorizationItems")
       .withIndex("by_folder", (q) => q.eq("folderId", args.id))
       .collect();
     const deleteDoomedItems = itemsInFolder
-      .filter(item=>!updatedIds.includes(item._id))
-      .map((item)=>ctx.db.delete(item._id));
+      .filter((item) => !updatedIds.includes(item._id))
+      .map((item) => ctx.db.delete(item._id));
 
     // For each item included in the request, update the ID'd item if given an ID,
-    // Or insert a brand new item if there's no ID given    
+    // Or insert a brand new item if there's no ID given
     const updateAllItems = args.memItems.map(async (memItem, index) => {
       if (memItem._id !== undefined) {
         await ctx.db.replace(memItem._id, {

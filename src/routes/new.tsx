@@ -16,8 +16,7 @@ function RouteComponent() {
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold mb-2">Create New Shared Folder</h2>
         <p className="text-lg font-extralight">
-          This folder and all of its items will be available to anyone with the
-          link
+          This folder and all of its items will be available to anyone with the link
         </p>
       </div>
       <FolderForm

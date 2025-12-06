@@ -7,9 +7,7 @@ import { Button } from "../ui/button";
 import { useAppForm } from "../Form/useAppForm";
 import { Card, CardTitle } from "../ui/card";
 
-export type GetFolder = FunctionReturnType<
-  typeof api.tasks.getFolder
->["folder"];
+export type GetFolder = FunctionReturnType<typeof api.tasks.getFolder>["folder"];
 export type CreateFolder = FunctionArgs<typeof api.tasks.createFolder>;
 export type Folder = CreateFolder | GetFolder;
 
@@ -46,7 +44,8 @@ export const FolderForm = ({
             )
             .refine(
               (items) =>
-                items.length > 1 && items.every(
+                items.length > 1 &&
+                items.every(
                   (item, index) =>
                     (item.text.length > 0 && item.title.length > 0) ||
                     (index === items.length - 1 &&
@@ -92,10 +91,7 @@ export const FolderForm = ({
       className="space-y-4"
     >
       <div className="flex flex-row gap-2">
-        <form.AppField
-          name="title"
-          children={(field) => <field.TextField label="Title" />}
-        />
+        <form.AppField name="title" children={(field) => <field.TextField label="Title" />} />
 
         <form.AppField
           name="slug"
@@ -112,9 +108,7 @@ export const FolderForm = ({
             <div className="space-y-4">
               {itemsField.state.value.length === 0 ? (
                 <div className="text-center py-8 text-slate-500">
-                  <p className="text-sm">
-                    No items yet. Click "Add Item" to get started!
-                  </p>
+                  <p className="text-sm">No items yet. Click "Add Item" to get started!</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -123,10 +117,7 @@ export const FolderForm = ({
                       <div key={i} className="flex flex-col sm:flex-row gap-4">
                         <form.AppField name={`memItems[${i}].title`}>
                           {(itemTitleField) => (
-                            <itemTitleField.TextField
-                              className="grow-1 basis-0"
-                              label="Item Title"
-                            />
+                            <itemTitleField.TextField className="grow basis-0" label="Item Title" />
                           )}
                         </form.AppField>
 
@@ -159,21 +150,18 @@ export const FolderForm = ({
 
       <div className="flex">
         <form.Subscribe
-          selector={(state) => [
-            state.canSubmit,
-            state.isSubmitting,
-            state.errors,
-          ]}
+          selector={(state) => [state.canSubmit, state.isSubmitting, state.errors]}
           children={([canSubmit, isSubmitting]) => (
-            <Button type="submit" disabled={!canSubmit} variant="primary" className="disabled:opacity-50">
+            <Button
+              type="submit"
+              disabled={!canSubmit}
+              variant="primary"
+              className="disabled:opacity-50"
+            >
               {isSubmitting ? (
-                <div className="flex items-center gap-2">
-                  {submitButtonLoadingText}
-                </div>
+                <div className="flex items-center gap-2">{submitButtonLoadingText}</div>
               ) : (
-                <div className="flex items-center gap-2">
-                  {submitButtonText}
-                </div>
+                <div className="flex items-center gap-2">{submitButtonText}</div>
               )}
             </Button>
           )}
