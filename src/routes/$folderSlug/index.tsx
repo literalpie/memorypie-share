@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { api } from "../../../convex/_generated/api";
+import { api } from "#convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
-import { FolderForm, GetFolder } from "@/components/FolderForm/FolderForm";
+import { FolderForm, GetFolder } from "#src/components/FolderForm/FolderForm";
 
 export const Route = createFileRoute("/$folderSlug/")({
   component: RouteComponent,

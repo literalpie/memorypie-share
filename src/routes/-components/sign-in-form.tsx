@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "#src/components/ui/button";
 import { SignInButton, SignUpButton } from "@clerk/clerk-react";
 
 export function SignInForm() {

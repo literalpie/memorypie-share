@@ -1,7 +1,7 @@
-import { api } from "../../../convex/_generated/api";
 import { useQuery } from "convex/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "#src/components/ui/button";
 import { Link, useParams } from "@tanstack/react-router";
+import { api } from "#convex/_generated/api";
 
 export const FoldersList = () => {
   const { folderSlug }: { folderSlug?: string } = useParams({ strict: false });

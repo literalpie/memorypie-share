@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "imports": {
+    "#convex/*": "./convex/*.js",
+    "#src/*": "./src/*.js"
+  },
   "scripts": {
     "dev": "concurrently 'pnpm run dev:frontend' 'pnpm run dev:backend'",
     "dev:frontend": "vite --open",

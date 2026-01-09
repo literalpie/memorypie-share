@@ -1,6 +1,6 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { UserButton, useAuth } from "@clerk/clerk-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "#src/components/ui/button";
 import { FoldersList } from "./-components/folders-list";
 import { SignInForm } from "./-components/sign-in-form";
 

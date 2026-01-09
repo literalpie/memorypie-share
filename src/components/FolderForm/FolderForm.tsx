@@ -1,5 +1,5 @@
 import { Separator } from "@radix-ui/react-separator";
-import { api } from "../../../convex/_generated/api";
+import { api } from "#convex/_generated/api";
 import { FunctionArgs, FunctionReturnType } from "convex/server";
 import { Trash } from "lucide-react";
 import z from "zod";

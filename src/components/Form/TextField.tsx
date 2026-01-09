@@ -1,5 +1,5 @@
 import { useFieldContext } from "./form-hooks";
-import { cn } from "@/lib/utils";
+import { cn } from "#src/lib/utils";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { LabelProps } from "@radix-ui/react-label";
