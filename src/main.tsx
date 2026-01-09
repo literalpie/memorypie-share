@@ -7,7 +7,6 @@ import "./index.css";
 import { ErrorBoundary } from "./ErrorBoundary.tsx";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen.ts";
-import { SignInForm } from "./components/SignInForm.tsx";
 
 const router = createRouter({ routeTree });
 
@@ -21,7 +20,7 @@ createRoot(document.getElementById("root")!).render(
             <RouterProvider router={router} />
           </Authenticated>
           <Unauthenticated>
-            <SignInForm />
+            <RouterProvider router={router} />
           </Unauthenticated>
         </ConvexProviderWithClerk>
       </ClerkProvider>

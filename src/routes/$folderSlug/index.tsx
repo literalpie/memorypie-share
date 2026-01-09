@@ -15,6 +15,9 @@ function RouteComponent() {
   if (folder === undefined) {
     return <div>Loading or not found</div>;
   }
+  if (!folder.userOwned) {
+    return <div>You don't own this folder, so you can't make changes to it.</div>;
+  }
   return (
     <div className="py-8 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-8">
