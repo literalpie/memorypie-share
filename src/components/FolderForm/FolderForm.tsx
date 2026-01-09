@@ -111,7 +111,7 @@ export const FolderForm = ({
           )}
         />
       </div>
-      <Card className="p-3 border">
+      <Card className="p-3">
         <CardTitle>
           <h3>Memorization Items</h3>
         </CardTitle>
