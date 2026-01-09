@@ -5,6 +5,8 @@
 - [ ] Validate
   - [ ] uniqueness of slug
   - [ ] max lengths?
+- [ ] Better loading state (skeletons)
+- [ ] Don't allow editing slug after initial creation
 
 ## Initial Web
 

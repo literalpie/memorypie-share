@@ -22,6 +22,7 @@ export const TextAreaField = ({ label, placeholder, className, ...rest }: TextFi
       {label}
       <Textarea
         id={field.name}
+        className="placeholder:text-secondary-text"
         value={field.state.value}
         onBlur={field.handleBlur}
         placeholder={placeholder}

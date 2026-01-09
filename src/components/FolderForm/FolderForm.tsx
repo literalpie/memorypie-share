@@ -2,6 +2,7 @@ import { api } from "#convex/_generated/api";
 import { Separator } from "@radix-ui/react-separator";
 import { FunctionArgs, FunctionReturnType } from "convex/server";
 import { Trash } from "lucide-react";
+import slugify from "slugify";
 import z from "zod";
 
 import { useAppForm } from "../Form/useAppForm";
@@ -75,6 +76,7 @@ export const FolderForm = ({
     onSubmit: async ({ value }) =>
       onSubmit({
         ...value,
+        slug: slugify(value.slug, { lower: true, strict: true }),
         memItems: value.memItems.filter(
           // Filter out the last item, which will always be empty
           (item) => item.text.length > 0 && item.title.length > 0,
@@ -92,11 +94,21 @@ export const FolderForm = ({
       className="space-y-4"
     >
       <div className="flex flex-row gap-2">
-        <form.AppField name="title" children={(field) => <field.TextField label="Title" />} />
+        <form.AppField
+          name="title"
+          children={(field) => <field.TextField className="flex-1" label="Title" />}
+        />
 
         <form.AppField
           name="slug"
-          children={(field) => <field.TextField label="Slug (URL name)" />}
+          children={(field) => (
+            <div className="flex-1">
+              <field.TextField label="Slug (URL name)" />
+              <span className="text-secondary-text text-sm">
+                memorypie.app/shared/{slugify(field.state.value, { lower: true, strict: true })}
+              </span>
+            </div>
+          )}
         />
       </div>
       <Card className="p-3 border">

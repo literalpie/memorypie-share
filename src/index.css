@@ -15,6 +15,7 @@
   --color-destructive-shadow: hsl(0, 100%, 77%);
   --color-black: hsl(0, 0%, 0%);
   --color-text: hsla(0, 0%, 0%, 0.87);
+  --color-secondary-text: var(--color-neutral-400);
   --color-divider: var(--color-blue-200);
   --color-background-hover: var(--color-gray-100);
   --color-background-focus: var(--color-gray-200);
@@ -41,8 +42,10 @@
     --color-primary-shadow: hsl(240, 24%, 43%);
     --color-destructive-text: hsl(0, 87%, 70%);
     --color-destructive-shadow: hsl(0, 100%, 60%);
+    --color-secondary-text: var(--color-neutral-500);
     --color-text: hsla(0, 0%, 96%, 0.87);
     --color-divider: hsla(240, 15%, 40%, 0.2);
+    --color-background-hover: var(--color-neutral-800);
     --color-background-active: hsla(240, 28%, 25%, 0.19);
     --color-border: hsl(0, 0%, 29%);
     --color-memorize-background: hsl(141, 25%, 31%);
