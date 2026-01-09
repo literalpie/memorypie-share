@@ -1,11 +1,13 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import { ClerkProvider, useAuth } from "@clerk/clerk-react";
-import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { Authenticated, ConvexReactClient, Unauthenticated } from "convex/react";
-import "./index.css";
-import { ErrorBoundary } from "./ErrorBoundary.tsx";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { Authenticated, ConvexReactClient, Unauthenticated } from "convex/react";
+import { ConvexProviderWithClerk } from "convex/react-clerk";
+import { StrictMode } from "react";
+
+import "./index.css";
+import { createRoot } from "react-dom/client";
+
+import { ErrorBoundary } from "./ErrorBoundary.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 
 const router = createRouter({ routeTree });

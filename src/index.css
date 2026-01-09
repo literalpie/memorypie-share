@@ -6,7 +6,7 @@
 @theme {
   --color-light: #ffffff;
   --color-dark: #171717;
-  
+
   /* Custom colors from SCSS */
   --color-primary-text: hsl(240, 89%, 70%);
   --color-primary-shadow-focused: hsl(240, 83%, 65%);
@@ -33,7 +33,7 @@
     background: var(--color-dark);
     font-family: system-ui, sans-serif;
   }
-  
+
   /* Dark mode color overrides */
   :root {
     --color-primary-text: hsl(240, 38.27%, 63.55%);
@@ -52,7 +52,6 @@
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --ring: oklch(0.556 0 0);
-  
   }
 }
 
@@ -78,4 +77,3 @@
     @apply bg-background text-foreground;
   }
 }
-

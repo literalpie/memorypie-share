@@ -3,7 +3,6 @@
 - [ ] JSON import
 - [ ] Error handling (slug not found)
 - [ ] Validate
-
   - [ ] uniqueness of slug
   - [ ] max lengths?
 
