@@ -40,8 +40,7 @@ function RouteComponent() {
             })),
           });
         }}
-        submitButtonText="Update Folder"
-        submitButtonLoadingText="Updating Folder..."
+        isEditing
       />
     </div>
   );

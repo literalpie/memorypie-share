@@ -28,8 +28,6 @@ function RouteComponent() {
           });
           await navigate({ to: "/" });
         }}
-        submitButtonText="Create Folder"
-        submitButtonLoadingText="Creating..."
       />
     </div>
   );

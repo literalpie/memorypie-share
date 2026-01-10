@@ -56,6 +56,23 @@ export const createFolder = mutation({
     ),
   },
   handler: async (ctx, args) => {
+    if (args.title.length > 100) {
+      throw new Error("Title must be 100 characters or less");
+    }
+    if (!args.slug.match(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)) {
+      throw new Error("Not a valid slug");
+    }
+    if (args.slug.length > 50) {
+      throw new Error("Slug must be 50 characters or less");
+    }
+    args.memItems.forEach((memItem) => {
+      if (memItem.text.length > 10_000) {
+        throw new Error("Item text must be 10_000 characters or less");
+      }
+      if (memItem.title.length > 100) {
+        throw new Error("Item text must be 10_000 characters or less");
+      }
+    });
     // TODO: check that slug is unique
     const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (userId === undefined) {
@@ -84,7 +101,6 @@ export const updateFolder = mutation({
   args: {
     id: v.id("folders"),
     title: v.string(),
-    // TODO: slug cannot include some punctuation
     slug: v.string(),
     memItems: v.array(
       v.object({
@@ -95,6 +111,25 @@ export const updateFolder = mutation({
     ),
   },
   handler: async (ctx, args) => {
+    if (args.title.length > 100) {
+      throw new Error("Title must be 100 characters or less");
+    }
+    if (args.slug.length > 50) {
+      throw new Error("Slug must be 50 characters or less");
+    }
+    // TODO: don't allow changing slug
+    if (!args.slug.match(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)) {
+      throw new Error("Not a valid slug");
+    }
+    args.memItems.forEach((memItem) => {
+      if (memItem.text.length > 10_000) {
+        throw new Error("Item text must be 10_000 characters or less");
+      }
+      if (memItem.title.length > 100) {
+        throw new Error("Item text must be 10_000 characters or less");
+      }
+    });
+
     // TODO: check that slug is unique (or is existing slug for this id)
     const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
     if (userId === undefined) {

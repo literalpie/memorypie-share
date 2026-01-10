@@ -3,13 +3,15 @@ import { LabelProps } from "@radix-ui/react-label";
 
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { ErrorsList } from "./ErrorsList";
 import { useFieldContext } from "./form-hooks";
 
 interface TextFieldProps extends LabelProps {
   label: string;
+  errors?: string[];
 }
 
-export const TextField = ({ label, className, ...rest }: TextFieldProps) => {
+export const TextField = ({ label, className, errors, ...rest }: TextFieldProps) => {
   const field = useFieldContext<string>();
 
   return (
@@ -27,6 +29,7 @@ export const TextField = ({ label, className, ...rest }: TextFieldProps) => {
         type="text"
         onChange={(e) => field.handleChange(e.target.value)}
       />
+      {errors && errors.length > 0 && <ErrorsList errors={errors} />}
     </Label>
   );
 };
