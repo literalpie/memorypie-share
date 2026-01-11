@@ -23,7 +23,7 @@ function RootComponent() {
         {isSignedIn ? (
           <>
             <FoldersList />
-            <Button variant="primary" className="m-2" asChild>
+            <Button variant="primary" className="m-4" asChild>
               <Link to="/new">New Shared Folder</Link>
             </Button>
           </>
