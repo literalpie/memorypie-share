@@ -1,4 +1,5 @@
 import { api } from "#convex/_generated/api";
+import { cn } from "#src/lib/utils";
 import { Separator } from "@radix-ui/react-separator";
 import { revalidateLogic } from "@tanstack/react-form";
 import { Link } from "@tanstack/react-router";
@@ -12,6 +13,9 @@ import { useAppForm } from "../Form/useAppForm";
 import { Button } from "../ui/button";
 import { Card, CardTitle } from "../ui/card";
 import { Label } from "../ui/label";
+import { DownloadFileButton } from "./DownloadFileButton";
+import { FileInputButton } from "./FileInputButton";
+import { useFileDrop } from "./useFileDrop";
 
 export type GetFolder = FunctionReturnType<typeof api.tasks.getFolder>["folder"];
 export type CreateFolder = FunctionArgs<typeof api.tasks.createFolder>;
@@ -117,6 +121,25 @@ export const FolderForm = ({
       }),
   });
 
+  const handleJsonFileDrop = async (file: File) => {
+    try {
+      const importedData = JSON.parse(await file.text()) as {
+        memories: { text: string; title: string }[];
+      };
+      form.setFieldValue("memItems", (oldMemItems) => {
+        return [
+          ...oldMemItems.filter((item) => item.text.length > 0 || item.title.length > 0),
+          ...importedData.memories.map((mem) => ({ title: mem.title, text: mem.text })),
+        ];
+      });
+    } catch {
+      // If it doesn't parse right, assume it's not the right kind of file.
+      // TODO: give user notification when an error happens
+    }
+  };
+
+  const { isDragging } = useFileDrop(handleJsonFileDrop);
+
   return (
     <form
       onSubmit={(e) => {
@@ -213,6 +236,16 @@ export const FolderForm = ({
                         ) : null}
                       </>
                     ))}
+                    <div
+                      aria-hidden={!isDragging}
+                      className={cn(
+                        "p-8 max-h-[300px] border-2 border-dashed border-primary rounded-lg text-center bg-primary/5 transition-all duration-300 ease-in-out ",
+                        // To animate in/out, we set these things that cause it to have a height of truly zero.
+                        !isDragging && "-mt-4 max-h-0 opacity-0 p-0 border-0",
+                      )}
+                    >
+                      <p className="text-primary font-medium">Drop JSON file to add items</p>
+                    </div>
                     <ErrorsList errors={errorsAsStrings(itemsField.state.meta.errors)} />
                   </div>
                 )}
@@ -222,16 +255,45 @@ export const FolderForm = ({
         />
       </Card>
 
-      <form.Subscribe
-        selector={(state) => [state.isSubmitting, state.errors]}
-        children={([isSubmitting]) => {
-          return (
-            <Button type="submit" variant="primary">
-              {getButtonLabel({ isSubmitting: !!isSubmitting, isEditing: isEditing })}
-            </Button>
-          );
-        }}
-      />
+      <div className="justify-between flex">
+        <form.Subscribe
+          selector={(state) => [state.isSubmitting, state.errors]}
+          children={([isSubmitting]) => {
+            return (
+              <Button type="submit" variant="primary">
+                {getButtonLabel({ isSubmitting: !!isSubmitting, isEditing: isEditing })}
+              </Button>
+            );
+          }}
+        />
+        <div className="flex gap-2">
+          <FileInputButton
+            onFileSelect={(files) => {
+              const file = files.item(0);
+
+              if (file) {
+                handleJsonFileDrop(file);
+              }
+            }}
+          >
+            Import
+          </FileInputButton>
+          <DownloadFileButton
+            getFileInfo={() => {
+              const fileTitle = form.getFieldValue("title");
+              const data = {
+                memories: form
+                  .getFieldValue("memItems")
+                  .filter((item) => item.text.length > 0 || item.title.length > 0)
+                  .map((item) => ({ title: item.title, text: item.text })),
+              };
+              return { fileTitle, fileText: JSON.stringify(data) };
+            }}
+          >
+            Export
+          </DownloadFileButton>
+        </div>
+      </div>
     </form>
   );
 };

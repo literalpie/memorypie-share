@@ -59,20 +59,17 @@ const buttonVariants = cva(
     },
   },
 );
-
-export function Button({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"button"> &
+export type ButtonProps = React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-  }) {
+  };
+
+export function Button({ className, variant, asChild = false, ...props }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
+      type="button"
       data-slot="button"
       className={cn(buttonVariants({ variant, className }), "cursor-pointer")}
       {...props}
