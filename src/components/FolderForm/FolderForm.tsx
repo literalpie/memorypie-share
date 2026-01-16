@@ -164,7 +164,7 @@ export const FolderForm = ({
         <form.AppField
           name="slug"
           children={(field) => {
-            const urlWithSlug = `memorypie.app/shared/${slugify(field.state.value, { lower: true, strict: true })}`;
+            const urlWithSlug = `https://memorypie.app/shared/${slugify(field.state.value, { lower: true, strict: true })}`;
             return isEditing ? (
               <Label className="flex-col items-start flex-1">
                 Link
